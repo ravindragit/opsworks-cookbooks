@@ -34,10 +34,11 @@ when 'centos', 'redhat', 'fedora', 'amazon'
     action :delete
   end
 
-  # replace with debian config
+ # replace with debian config
   template File.join(node[:apache][:dir], 'mods-available', 'php5.conf') do
     source 'mods/php5.conf.erb'
-    notifies :restart, 'service[apache2]'
+    notifies :restart, resources(:service => 'apache2')
+####### notifies :restart, 'service[apache2]'
   end
 end
 
